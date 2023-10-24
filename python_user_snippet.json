@@ -1,5 +1,5 @@
 {
-	"plotly_1_basic":{
+	"기본 코드":{
 		"prefix":"user_code_snippet_plotly_1_basic",
 		"body":[
 				"from plotly.subplots import make_subplots",
@@ -22,10 +22,9 @@
 				"fig.update_yaxes(title_text='&lt;b&gt;왼쪽 제목&lt;/b&gt;', secondary_y=False)",
 				"fig.update_yaxes(title_text='오른쪽 제목', secondary_y=True)",
 				"fig.show()"
-		],
-		"description":"user_code_snippet_plotly 기본 코드입니다."
+		]
 	},
-	"dash_1_basic":{
+	"콜백+부트스트랩":{
 		"prefix":"user_code_snippet_dash_1_basic",
 		"body":[
 				"import dash",
@@ -55,10 +54,9 @@
 				"",
 				"if __name__ == '__main__':",
 				"    app.run_server()"
-		],
-		"description":"user_code_snippet_Walrus 활용, 콜백이 있는 부트스트랩 dash 코드입니다."
+		]
 	},
-	"dash_2_animation":{
+	"애니메이션":{
 		"prefix":"user_code_snippet_dash_2_animation",
 		"body":[
 				"from dash import Dash, dcc, html, Input, Output, clientside_callback, State",
@@ -108,10 +106,9 @@
 				"",
 				"if __name__ == '__main__':",
 				"    app.run(debug=True)"
-		],
-		"description":"user_code_snippet_3상 전압 값 애니메이션입니다."
+		]
 	},
-	"user_code_snippet_async_1_requests":{
+	"비동기 요청":{
 		"prefix":"user_code_snippet_async_1_requests",
 		"body":[
 			"# https://www.twilio.com/blog/asynchronous-http-requests-in-python-with-aiohttp",
@@ -141,8 +138,6 @@
 			"result = asyncio.run(main())",
 			"print(result)",
 			"print(time.time() - start)"
-		],
-		"description":"비동기 요청입니다."
+		]
 	}
 }
-
