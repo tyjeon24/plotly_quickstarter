@@ -1,6 +1,6 @@
 {
-	"plotly_basic":{
-		"prefix":"plotly_basic",
+	"plotly_1_basic":{
+		"prefix":"user_code_snippet_plotly_1_basic",
 		"body":[
 				"from plotly.subplots import make_subplots",
 				"import plotly.graph_objects as go",
@@ -21,61 +21,47 @@
 				"fig.update_xaxes(title_text='X축 제목')",
 				"fig.update_yaxes(title_text='&lt;b&gt;왼쪽 제목&lt;/b&gt;', secondary_y=False)",
 				"fig.update_yaxes(title_text='오른쪽 제목', secondary_y=True)",
-				"fig.show()",
+				"fig.show()"
 		],
-		"description":"plotly 기본 코드입니다."
+		"description":"user_code_snippet_plotly 기본 코드입니다."
 	},
-	"dash_basic":{
-		"prefix":"dash_basic",
+	"dash_1_basic":{
+		"prefix":"user_code_snippet_dash_1_basic",
 		"body":[
 				"import dash",
 				"import dash_bootstrap_components as dbc",
 				"from dash import Input, Output, html",
 				"",
-				"app = dash.Dash(external_stylesheets=[dbc.themes.DARKLY])",
-				"",
-				"app.layout = html.Div(",
-				"    [",
-				"        dbc.Button(",
-				"            'Click me', id='button', className='me-2', n_clicks=0",
-				"        ),",
-				"        html.Span(id='number_of_click', style={'verticalAlign': 'middle'}),",
-				"    ]",
-				")",
-				"",
-				"@app.callback(Output('number_of_click', 'children'), [Input('button', 'n_clicks')])",
-				"def on_button_click(n):",
-				"    return f'Clicked {n} times.'",
-				"",
-				"if __name__ == '__main__':",
-				"    app.run_server()",
-		],
-		"description":"콜백이 있는 부트스트랩 dash 코드입니다."
-	},
-	"dash_short":{
-		"prefix":"dash_short",
-		"body":[
-				"import dash",
-				"import dash_bootstrap_components as dbc",
-				"from dash import Input, Output, html",
+				"white_button_style = {'background-color': 'white', 'color': 'black'}",
+				"red_button_style = {'background-color': 'red', 'color': 'white'}",
 				"",
 				"app = dash.Dash(external_stylesheets=[dbc.themes.DARKLY])",
 				"click_counter_button = dbc.Button('Click me', className='me-2', n_clicks=0)",
-				"app.layout = html.Div([click_counter_button,number_of_click_text := html.Span()])",
+				"app.layout = html.Div([click_counter_button, number_of_click_text := html.Span()])",
 				"",
-				"@app.callback(Output(number_of_click_text, 'children'), [Input(click_counter_button, 'n_clicks')])",
+				"",
+				"@app.callback(",
+				"    [Output(number_of_click_text, 'children'),",
+				"     Output(click_counter_button, 'children'),",
+				"     Output(click_counter_button, 'style')],",
+				"    [Input(click_counter_button, 'n_clicks')],",
+				")",
 				"def on_button_click(n):",
-				"    return f'Clicked {n} times.'",
+				"    style = red_button_style",
+				"    if n % 2 == 0:",
+				"        style = white_button_style",
+				"    return f'Clicked {n} times.', n, style",
+				"",
 				"",
 				"if __name__ == '__main__':",
-				"    app.run_server()",
+				"    app.run_server()"
 		],
-		"description":"Walrus 활용, 콜백이 있는 부트스트랩 dash 코드입니다."
+		"description":"user_code_snippet_Walrus 활용, 콜백이 있는 부트스트랩 dash 코드입니다."
 	},
-	"dash_animation":{
-		"prefix":"dash_animation",
+	"dash_2_animation":{
+		"prefix":"user_code_snippet_dash_2_animation",
 		"body":[
-				"from dash import Dash, dcc, html, Input, Output, State, clientside_callback",
+				"from dash import Dash, dcc, html, Input, Output, clientside_callback, State",
 				"import pandas as pd",
 				"import numpy as np",
 				"",
@@ -121,8 +107,42 @@
 				")",
 				"",
 				"if __name__ == '__main__':",
-				"    app.run(debug=True)",
+				"    app.run(debug=True)"
 		],
-		"description":"3상 전압 값 애니메이션입니다."
+		"description":"user_code_snippet_3상 전압 값 애니메이션입니다."
 	},
+	"user_code_snippet_async_1_requests":{
+		"prefix":"user_code_snippet_async_1_requests",
+		"body":[
+			"# https://www.twilio.com/blog/asynchronous-http-requests-in-python-with-aiohttp",
+			"import aiohttp",
+			"import asyncio",
+			"import sys",
+			"import time",
+			"",
+			"if USING_NOTEBOOK:='ipykernel' in sys.modules:",
+			"    import nest_asyncio",
+			"    nest_asyncio.apply()",
+			"",
+			"start = time.time()",
+			"",
+			"async def get_info(session, url):",
+			"    async with session.get(url) as resp:",
+			"        response = await resp.json()",
+			"        data = response['name']",
+			"        return data",
+			"",
+			"async def main():",
+			"    async with aiohttp.ClientSession() as session:",
+			"        tasks = [asyncio.ensure_future(get_info(session, f'https://pokeapi.co/api/v2/pokemon/{number}')) for number in range(1, 151)]",
+			"        result = await asyncio.gather(*tasks)",
+			"    return result",
+			"",
+			"result = asyncio.run(main())",
+			"print(result)",
+			"print(time.time() - start)"
+		],
+		"description":"비동기 요청입니다."
+	}
 }
+
